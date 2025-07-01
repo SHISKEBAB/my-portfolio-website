@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Projects – Shishir S Tambe</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    <!-- Vis.js -->
+    <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vis-network@9.1.2/styles/vis-network.min.css" />
+
+    <style>
+      body {
+        background-color: #1e1e2e;
+        color: #f5f5f5;
+      }
+
+      #main {
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 4em auto;
+        padding: 2em;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        border: 1px solid #3e4452;
+      }
+
+      .contrib-grid {
+        display: grid;
+        grid-template-columns: repeat(52, 1fr);
+        grid-gap: 2px;
+        margin: 2em 0;
+        justify-content: center;
+      }
+
+      .contrib-cell {
+        width: 10px;
+        height: 10px;
+        background-color: #3b3b3b;
+        border-radius: 2px;
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      .contrib-cell.active {
+        background-color: #cba6f7;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
+      #graph-container {
+        width: 100%;
+        height: 700px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.02);
+        margin-top: 3em;
+      }
+
+      .button-center {
+        display: flex;
+        justify-content: center;
+        margin-top: 3em;
+      }
+
+      a.button {
+        background-color: #cba6f7;
+        color: #1e1e2e !important;
+        border: none;
+        padding: 0.8em 1.2em;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a.button:hover {
+        background-color: #f38ba8;
+        color: #000 !important;
+      }
+    </style>
+  </head>
+  <body class="is-preload">
+    <div id="wrapper">
+      <div id="main">
+        <section class="container">
+          <h1 style="text-align:center;">My Project Network</h1>
+          <p style="text-align:center;">A visual map of my technical documentation ecosystem — structured, scalable, and searchable.</p>
+
+          <!-- GitHub Contribution Grid -->
+          <!-- GitHub Contribution Section -->
+          <div style="text-align:center; margin-top: 3em;">
+            <h2 style="color: #cba6f7;">GitHub Contributions</h2>
+                <img 
+                    src="https://github-readme-stats.vercel.app/api?username=SHISKEBAB&show_icons=true&theme=radical&hide=stars&count_private=true" 
+                    alt="GitHub Stats"
+                    style="max-width: 100%; border-radius: 12px; margin-top: 1em;"
+                />
+                <br/>
+           </div>
+
+
+          <!-- Interactive Graph -->
+          <div id="graph-container"></div>
+
+          <div class="button-center">
+            <a href="index.html" class="button">← Back to Home</a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <p class="copyright">&copy; 2025 Shishir T.</p>
+      </footer>
+    </div>
+
+    <!-- Background -->
+    <div id="bg"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Graph Script -->
+    <script>
+      const nodes = new vis.DataSet([
+        { id: 0, label: "My Projects", shape: "circle", size: 100 , color: "#cba6f7", font: { color: "#1e1e2e" } },
+
+        { id: 1, label: "End User Docs", shape: "circle", color: "#89b4fa" , url: "enduser.html"},
+        { id: 2, label: "Technical Manuals", shape: "circle", color: "#89b4fa" , url: "techman.html"},
+        { id: 3, label: "SOPs", shape: "circle", color: "#89b4fa"  , url: "sops.html" },
+        { id: 4, label: "API Documentation", shape: "circle", color: "#89b4fa" , url: "apidocs.html"},
+        { id: 5, label: "Knowledge-Based Articles", shape: "circle", color: "#89b4fa" , url: "knowbas.html"},
+        { id: 6, label: "Proposals & Reports", shape: "circle", color: "#89b4fa" , url: "pronrep.html"},
+        { id: 7, label: "White Pages", shape: "circle", color: "#89b4fa" , url: "whitepg.html"},
+
+        <!-- { id: 101, label: "User Onboarding Guide" } -->,
+        { id: 102, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0" , url: "enduser.html"},
+
+        <!-- { id: 201, label: "Tech Manual – HAM" } -->,
+        { id: 202, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0" , url: "techman.html"},
+
+        <!-- { id: 301, label: "Concrete Pouring SOP" } -->,
+        { id: 302, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0", url: "sops.html" },
+
+        <!-- { id: 401, label: "Node.js API Docs" } -->,
+        { id: 402, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0" , url: "apidocs.html"},
+
+        <!-- { id: 501, label: "FreeCAD Basics" } -->,
+        { id: 502, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0" , url: "knowbas.html"},
+
+        <!-- { id: 601, label: "Chennai–Tirupati Report" } -->,
+        { id: 602, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0" , url: "pronrep.html"},
+
+        <!-- { id: 701, label: "Data Governance Paper" } -->,
+        { id: 702, label: "+72 more", shape: "dot", size: 16, color: "#FF47B0" , url: "whitepg.html"}
+      ]);
+
+      const edges = new vis.DataSet([
+        { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 0, to: 3 },
+        { from: 0, to: 4 }, { from: 0, to: 5 }, { from: 0, to: 6 },
+        { from: 0, to: 7 },
+
+        { from: 1, to: 101 }, { from: 1, to: 102 },
+        { from: 2, to: 201 }, { from: 2, to: 202 },
+        { from: 3, to: 301 }, { from: 3, to: 302 },
+        { from: 4, to: 401 }, { from: 4, to: 402 },
+        { from: 5, to: 501 }, { from: 5, to: 502 },
+        { from: 6, to: 601 }, { from: 6, to: 602 },
+        { from: 7, to: 701 }, { from: 7, to: 702 }
+      ]);
+
+      const container = document.getElementById("graph-container");
+      const data = { nodes, edges };
+      const options = {
+        nodes: {
+          shape: "dot",
+          size: 16,
+          font: { size: 13, color: "#f5f5f5" },
+          borderWidth: 2
+        },
+        edges: {
+          width: 1.5,
+          color: { color: "#f38ba8" }
+        },
+        physics: {
+          stabilization: true
+        },
+        layout: {
+          improvedLayout: true
+        },
+        interaction: {
+          hover: true,
+          tooltipDelay: 100
+        }
+      };
+
+      const network = new vis.Network(container, data, options);
+
+      network.on("click", function (params) {
+        const nodeId = params.nodes[0];
+        const node = nodes.get(nodeId);
+        if (node && node.url) {
+          window.location.href = node.url;
+        }
+      });
+    </script>
+  </body>
+</html>

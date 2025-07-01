@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Shishir S Tambe</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <style>
+    body {
+      background-color: #1e1e2e;
+      color: #f5f5f5;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2em;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2em;
+      border-radius: 12px;
+      border: 1px solid #3e4452;
+    }
+    h1 {
+      text-align: center;
+      color: #cba6f7;
+    }
+    p.description {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75em;
+      margin: 0.5em 0;
+      background-color: #2e2e3e;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 6px;
+    }
+    form button {
+      background-color: #cba6f7;
+      color: #1e1e2e;
+      padding: 0.75em 2em;
+      border: none;
+      border-radius: 6px;
+      margin-top: 1em;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #f38ba8;
+    }
+    .social-icons {
+      text-align: center;
+      margin: 2em 0;
+    }
+    .social-icons a {
+      margin: 0 0.5em;
+      text-decoration: none;
+      color: #cdd6f4;
+      font-size: 1.5em;
+    }
+    .buttons-bottom {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin-top: 2em;
+    }
+    .buttons-bottom a {
+      background-color: #cba6f7;
+      color: #1e1e2e;
+      padding: 0.75em 2em;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .buttons-bottom a:hover {
+      background-color: #f38ba8;
+    }
+    #game {
+      max-width: 300px;
+      margin: 3em auto 0 auto;
+      text-align: center;
+    }
+    #game .row {
+      display: flex;
+    }
+    #game .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #444;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      margin: 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Let's Get In Touch</h1>
+    <p class="description">Feel free to connect with me on any platform or drop a message below.</p>
+
+    <div class="social-icons">
+      <a href="mailto:shishirstambe01@gmail.com" title="Email">📧</a>
+      <a href="https://github.com/SHISKEBAB" target="_blank">🐙</a>
+      <a href="https://linkedin.com/in/shishir-tambe/" target="_blank">🔗</a>
+      <a href="https://x.com/Shishtam22" target="_blank">𝕏</a>
+      <a href="https://instagram.com/shogun_kuvekuvatsu" target="_blank">📸</a>
+      <a href="https://hashnode.com/@ShishirLearns" target="_blank">✍️</a>
+      <a href="https://medium.com/@shishirtambe0" target="_blank">📰</a>
+    </div>
+
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="buttons-bottom">
+      <a href="assets/Shishir_Tambe_Resume.pdf" download>📄 Download Resume</a>
+      <a href="index.html">🏠 Back to Home</a>
+    </div>
+
+    <div id="game">
+      <h3>Play <br />
+		Tic-Tac-Toe</h3>
+      <div class="row">
+        <div class="cell" onclick="makeMove(this)"></div>
+        <div class="cell" onclick="makeMove(this)"></div>
+        <div class="cell" onclick="makeMove(this)"></div>
+      </div>
+      <div class="row">
+        <div class="cell" onclick="makeMove(this)"></div>
+        <div class="cell" onclick="makeMove(this)"></div>
+        <div class="cell" onclick="makeMove(this)"></div>
+      </div>
+      <div class="row">
+        <div class="cell" onclick="makeMove(this)"></div>
+        <div class="cell" onclick="makeMove(this)"></div>
+        <div class="cell" onclick="makeMove(this)"></div>
+      </div>
+      <p id="winner" style="margin-top:1em;"></p>
+    </div>
+  </div>
+
+  <script>
+    let currentPlayer = "X";
+    function makeMove(cell) {
+      if (cell.textContent === "") {
+        cell.textContent = currentPlayer;
+        if (checkWinner()) {
+          document.getElementById("winner").textContent = `${currentPlayer} wins!`;
+          setTimeout(() => location.reload(), 2000);
+          return;
+        }
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
+    }
+
+    function checkWinner() {
+      const cells = document.querySelectorAll(".cell");
+      const combos = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return combos.some(([a,b,c]) => {
+        return cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent;
+      });
+    }
+  </script>
+</body>
+</html>

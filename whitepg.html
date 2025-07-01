@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>SOPs – Shishir S Tambe</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    <!-- Vis.js -->
+    <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vis-network@9.1.2/styles/vis-network.min.css" />
+
+    <style>
+      body {
+        background-color: #1e1e2e;
+        color: #f5f5f5;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 4em auto;
+        padding: 2em;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        border: 1px solid #3e4452;
+      }
+      #graph-container {
+        width: 100%;
+        height: 800px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.02);
+        margin-top: 3em;
+      }
+      .button-center {
+        display: flex;
+        justify-content: center;
+        margin-top: 3em;
+      }
+      a.button {
+        background-color: #cba6f7;
+        color: #1e1e2e !important;
+        border: none;
+        padding: 0.5em 1.5em;
+        border-radius: 6px;
+        text-decoration: none;
+      }
+      a.button:hover {
+        background-color: #f38ba8;
+        color: #000 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align:center;">White pages</h1>
+      <p style="text-align:center;">Click a node to view the corresponding GitHub project.</p>
+      <div id="graph-container"></div>
+      <div class="button-center">
+        <a href="projects.html" class="button">← Back to Projects</a>
+      </div>
+    </div>
+
+    <!-- Graph Script -->
+    <script>
+      const nodes = new vis.DataSet([
+        { id: 0, label: "SOPs", shape: "box", color: "#cba6f7", font: { color: "#1e1e2e" } },
+        { id: 1, label: "Concrete Pouring SOP", url: "https://github.com/SHISKEBAB/sop-01" },
+        { id: 2, label: "WMM Laying SOP", url: "https://github.com/SHISKEBAB/sop-02" },
+        { id: 3, label: "Bitumen Quality SOP", url: "https://github.com/SHISKEBAB/sop-03" },
+        { id: 4, label: "Bridge Casting SOP", url: "https://github.com/SHISKEBAB/sop-04" },
+        { id: 5, label: "Agent every", url: "https://github.com/SHISKEBAB/sop-05" },
+        { id: 6, label: "Cause bill", url: "https://github.com/SHISKEBAB/sop-06" },
+        { id: 7, label: "Beautiful instead ahead", url: "https://github.com/SHISKEBAB/sop-07" },
+        { id: 8, label: "Discussion own", url: "https://github.com/SHISKEBAB/sop-08" },
+        { id: 9, label: "Current practice nation", url: "https://github.com/SHISKEBAB/sop-09" },
+        { id: 10, label: "Shoulder moment forget", url: "https://github.com/SHISKEBAB/sop-10" },
+        { id: 11, label: "Sort hospital", url: "https://github.com/SHISKEBAB/sop-11" },
+        { id: 12, label: "Operation blood positive", url: "https://github.com/SHISKEBAB/sop-12" },
+        { id: 13, label: "Voice bag raise", url: "https://github.com/SHISKEBAB/sop-13" },
+        { id: 14, label: "Grow reason", url: "https://github.com/SHISKEBAB/sop-14" },
+        { id: 15, label: "Central serious game", url: "https://github.com/SHISKEBAB/sop-15" },
+        { id: 16, label: "Fast draw", url: "https://github.com/SHISKEBAB/sop-16" },
+        { id: 17, label: "Discuss structure", url: "https://github.com/SHISKEBAB/sop-17" },
+        { id: 18, label: "Expert moment", url: "https://github.com/SHISKEBAB/sop-18" },
+        { id: 19, label: "Traditional however", url: "https://github.com/SHISKEBAB/sop-19" },
+        { id: 20, label: "Miss impact", url: "https://github.com/SHISKEBAB/sop-20" },
+        { id: 21, label: "SOP #21", url: "https://github.com/SHISKEBAB/sop-21" },
+        { id: 22, label: "SOP #22", url: "https://github.com/SHISKEBAB/sop-22" },
+        { id: 23, label: "SOP #23", url: "https://github.com/SHISKEBAB/sop-23" },
+        { id: 24, label: "SOP #24", url: "https://github.com/SHISKEBAB/sop-24" },
+        { id: 25, label: "SOP #25", url: "https://github.com/SHISKEBAB/sop-25" },
+        { id: 26, label: "SOP #26", url: "https://github.com/SHISKEBAB/sop-26" },
+        { id: 27, label: "SOP #27", url: "https://github.com/SHISKEBAB/sop-27" },
+        { id: 28, label: "SOP #28", url: "https://github.com/SHISKEBAB/sop-28" },
+        { id: 29, label: "SOP #29", url: "https://github.com/SHISKEBAB/sop-29" },
+        { id: 30, label: "SOP #30", url: "https://github.com/SHISKEBAB/sop-30" },
+        { id: 31, label: "SOP #31", url: "https://github.com/SHISKEBAB/sop-31" },
+        { id: 32, label: "SOP #32", url: "https://github.com/SHISKEBAB/sop-32" },
+        { id: 33, label: "SOP #33", url: "https://github.com/SHISKEBAB/sop-33" },
+        { id: 34, label: "SOP #34", url: "https://github.com/SHISKEBAB/sop-34" },
+        { id: 35, label: "SOP #35", url: "https://github.com/SHISKEBAB/sop-35" },
+        { id: 36, label: "SOP #36", url: "https://github.com/SHISKEBAB/sop-36" },
+        { id: 37, label: "SOP #37", url: "https://github.com/SHISKEBAB/sop-37" },
+        { id: 38, label: "SOP #38", url: "https://github.com/SHISKEBAB/sop-38" },
+        { id: 39, label: "SOP #39", url: "https://github.com/SHISKEBAB/sop-39" },
+        { id: 40, label: "SOP #40", url: "https://github.com/SHISKEBAB/sop-40" },
+        { id: 41, label: "SOP #41", url: "https://github.com/SHISKEBAB/sop-41" },
+        { id: 42, label: "SOP #42", url: "https://github.com/SHISKEBAB/sop-42" },
+        { id: 43, label: "SOP #43", url: "https://github.com/SHISKEBAB/sop-43" },
+        { id: 44, label: "SOP #44", url: "https://github.com/SHISKEBAB/sop-44" },
+        { id: 45, label: "SOP #45", url: "https://github.com/SHISKEBAB/sop-45" },
+        { id: 46, label: "SOP #46", url: "https://github.com/SHISKEBAB/sop-46" },
+        { id: 47, label: "SOP #47", url: "https://github.com/SHISKEBAB/sop-47" },
+        { id: 48, label: "SOP #48", url: "https://github.com/SHISKEBAB/sop-48" },
+        { id: 49, label: "SOP #49", url: "https://github.com/SHISKEBAB/sop-49" },
+        { id: 50, label: "SOP #50", url: "https://github.com/SHISKEBAB/sop-50" },
+        { id: 51, label: "SOP #51", url: "https://github.com/SHISKEBAB/sop-51" },
+        { id: 52, label: "SOP #52", url: "https://github.com/SHISKEBAB/sop-52" },
+        { id: 53, label: "SOP #53", url: "https://github.com/SHISKEBAB/sop-53" },
+        { id: 54, label: "SOP #54", url: "https://github.com/SHISKEBAB/sop-54" },
+        { id: 55, label: "SOP #55", url: "https://github.com/SHISKEBAB/sop-55" },
+        { id: 56, label: "SOP #56", url: "https://github.com/SHISKEBAB/sop-56" },
+        { id: 57, label: "SOP #57", url: "https://github.com/SHISKEBAB/sop-57" },
+        { id: 58, label: "SOP #58", url: "https://github.com/SHISKEBAB/sop-58" },
+        { id: 59, label: "SOP #59", url: "https://github.com/SHISKEBAB/sop-59" },
+        { id: 60, label: "SOP #60", url: "https://github.com/SHISKEBAB/sop-60" },
+        { id: 61, label: "SOP #61", url: "https://github.com/SHISKEBAB/sop-61" },
+        { id: 62, label: "SOP #62", url: "https://github.com/SHISKEBAB/sop-62" },
+        { id: 63, label: "SOP #63", url: "https://github.com/SHISKEBAB/sop-63" },
+        { id: 64, label: "SOP #64", url: "https://github.com/SHISKEBAB/sop-64" },
+        { id: 65, label: "SOP #65", url: "https://github.com/SHISKEBAB/sop-65" },
+        { id: 66, label: "SOP #66", url: "https://github.com/SHISKEBAB/sop-66" },
+        { id: 67, label: "SOP #67", url: "https://github.com/SHISKEBAB/sop-67" },
+        { id: 68, label: "SOP #68", url: "https://github.com/SHISKEBAB/sop-68" },
+        { id: 69, label: "SOP #69", url: "https://github.com/SHISKEBAB/sop-69" },
+        { id: 70, label: "SOP #70", url: "https://github.com/SHISKEBAB/sop-70" },
+        { id: 71, label: "SOP #71", url: "https://github.com/SHISKEBAB/sop-71" },
+        { id: 72, label: "SOP #72", url: "https://github.com/SHISKEBAB/sop-72" }
+      ]);
+
+      const edges = new vis.DataSet([
+        ...Array.from({ length: 72 }, (_, i) => ({ from: 0, to: i + 1 }))
+      ]);
+
+      const container = document.getElementById("graph-container");
+      const data = { nodes, edges };
+      const options = {
+        nodes: {
+          shape: "dot",
+          size: 16,
+          font: { size: 13, color: "#f5f5f5" },
+          borderWidth: 2
+        },
+        edges: {
+          width: 1.5,
+          color: { color: "#f38ba8" }
+        },
+        interaction: {
+          hover: true,
+          navigationButtons: true,
+          tooltipDelay: 100
+        },
+        layout: {
+          improvedLayout: true
+        },
+        physics: {
+          stabilization: true
+        }
+      };
+
+      const network = new vis.Network(container, data, options);
+      network.on("click", function (params) {
+        const nodeId = params.nodes[0];
+        const node = nodes.get(nodeId);
+        if (node && node.url) {
+          window.open(node.url, "_blank");
+        }
+      });
+    </script>
+  </body>
+</html>
